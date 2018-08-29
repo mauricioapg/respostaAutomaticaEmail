@@ -1,0 +1,25 @@
+\\Ti02\z$\DIVERSOS\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\bin\Release\ServicosWindowsRespostaEmail.exe.config
+\\Ti02\z$\DIVERSOS\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\bin\Release\ServicosWindowsRespostaEmail.exe
+\\Ti02\z$\DIVERSOS\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\bin\Release\ServicosWindowsRespostaEmail.pdb
+\\Ti02\z$\DIVERSOS\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\bin\Release\OpenPop.dll
+\\Ti02\z$\DIVERSOS\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\bin\Release\Topshelf.dll
+\\Ti02\z$\DIVERSOS\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\bin\Release\Topshelf.xml
+\\Ti02\z$\DIVERSOS\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\obj\Release\ServicosWindowsRespostaEmail.csproj.CoreCompileInputs.cache
+\\Ti02\z$\DIVERSOS\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\obj\Release\ServicosWindowsRespostaEmail.csproj.CopyComplete
+\\Ti02\z$\DIVERSOS\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\obj\Release\ServicosWindowsRespostaEmail.exe
+\\Ti02\z$\DIVERSOS\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\obj\Release\ServicosWindowsRespostaEmail.pdb
+\\Ti02\z$\DIVERSOS\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\obj\Release\ServicosWindowsRespostaEmail.csprojAssemblyReference.cache
+\\Ti02\z$\DIVERSOS\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\bin\Release\System.Net.Pop3.dll
+C:\Users\Mauricio\Desktop\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\bin\Release\ServicosWindowsRespostaEmail.exe.config
+C:\Users\Mauricio\Desktop\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\obj\Release\ServicosWindowsRespostaEmail.exe
+C:\Users\Mauricio\Desktop\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\obj\Release\ServicosWindowsRespostaEmail.pdb
+C:\Users\Mauricio\Desktop\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\bin\Release\ServicosWindowsRespostaEmail.exe
+C:\Users\Mauricio\Desktop\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\bin\Release\ServicosWindowsRespostaEmail.pdb
+C:\Users\Mauricio\Desktop\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\bin\Release\OpenPop.dll
+C:\Users\Mauricio\Desktop\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\bin\Release\System.Net.Pop3.dll
+C:\Users\Mauricio\Desktop\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\bin\Release\Topshelf.dll
+C:\Users\Mauricio\Desktop\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\bin\Release\Topshelf.xml
+C:\Users\Mauricio\Desktop\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\obj\Release\ServicosWindowsRespostaEmail.csprojResolveAssemblyReference.cache
+C:\Users\Mauricio\Dropbox\PROGRAMAS DESENVOLVIDOS\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\bin\Release\ServicosWindowsRespostaEmail.exe.config
+C:\Users\Mauricio\Dropbox\PROGRAMAS DESENVOLVIDOS\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\obj\Release\ServicosWindowsRespostaEmail.exe
+C:\Users\Mauricio\Dropbox\PROGRAMAS DESENVOLVIDOS\ServicosWindowsRespostaEmail\ServicosWindowsRespostaEmail\obj\Release\ServicosWindowsRespostaEmail.pdb
