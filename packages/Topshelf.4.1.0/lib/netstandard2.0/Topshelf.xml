@@ -565,24 +565,6 @@
             </summary>
             <param name="configurator">The host configurator.</param>
         </member>
-        <member name="T:Topshelf.Options.ServiceRecoveryOption">
-            <summary>
-            Represents an option to set a service recovery options.
-            </summary>
-            <seealso cref="T:Topshelf.Options.Option" />
-        </member>
-        <member name="M:Topshelf.Options.ServiceRecoveryOption.#ctor(Topshelf.Runtime.Windows.ServiceRecoveryOptions)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Topshelf.Options.ServiceRecoveryOption"/> class.
-            </summary>
-            <param name="serviceRecoveryOptions">The service recovery options.</param>
-        </member>
-        <member name="M:Topshelf.Options.ServiceRecoveryOption.ApplyTo(Topshelf.HostConfigurators.HostConfigurator)">
-            <summary>
-            Applies the option to the specified host configurator.
-            </summary>
-            <param name="configurator">The host configurator.</param>
-        </member>
         <member name="T:Topshelf.Options.StartTimeoutOption">
             <summary>
             Represents an option to set a service start timeout (in seconds).

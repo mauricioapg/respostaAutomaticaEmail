@@ -12,6 +12,7 @@ namespace ServicosWindowsRespostaEmail
         public string Assunto { get; set; }
         public string De { get; set; }
         public string Para { get; set; }
+        public string Data { get; set; }
         public string ConteudoTexto { get; set; }
         public string ConteudoHtml { get; set; }
     }

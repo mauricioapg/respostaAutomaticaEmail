@@ -274,6 +274,73 @@
             </summary>
             <param name="parser"> The pattern to match and return the resulting object </param>
         </member>
+        <member name="T:Topshelf.Configurators.ValidateResult">
+            <summary>
+            Reports information about the configuration before configuring
+            so that corrections can be made without allocating resources, etc.
+            </summary>
+        </member>
+        <member name="P:Topshelf.Configurators.ValidateResult.Disposition">
+            <summary>
+            The disposition of the result, any Failure items will prevent
+            the configuration from completing.
+            </summary>
+        </member>
+        <member name="P:Topshelf.Configurators.ValidateResult.Message">
+            <summary>
+            The message associated with the result
+            </summary>
+        </member>
+        <member name="P:Topshelf.Configurators.ValidateResult.Key">
+            <summary>
+            The key associated with the result (chained if configurators are nested)
+            </summary>
+        </member>
+        <member name="P:Topshelf.Configurators.ValidateResult.Value">
+            <summary>
+            The value associated with the result
+            </summary>
+        </member>
+        <member name="T:Topshelf.Constants.KnownServiceNames">
+            <summary>
+            A selection of commonly-used Windows services.
+            </summary>
+        </member>
+        <member name="P:Topshelf.Constants.KnownServiceNames.Msmq">
+            <summary>
+            The Microsoft Message Queue service.
+            </summary>
+        </member>
+        <member name="P:Topshelf.Constants.KnownServiceNames.SqlServer">
+            <summary>
+            The Microsoft SQL Server service.
+            </summary>
+        </member>
+        <member name="P:Topshelf.Constants.KnownServiceNames.IIS">
+            <summary>
+            The Internet Information Server service.
+            </summary>
+        </member>
+        <member name="P:Topshelf.Constants.KnownServiceNames.EventLog">
+            <summary>
+            The Event Log service.
+            </summary>
+        </member>
+        <member name="M:Topshelf.HelpHostConfiguratorExtensions.SetHelpTextPrefix(Topshelf.HostConfigurators.HostConfigurator,System.String)">
+            <summary>
+            Sets additional text to be displayed before the built-in help text is displayed
+            </summary>
+            <param name="hostConfigurator"></param>
+            <param name="text"></param>
+        </member>
+        <member name="M:Topshelf.HelpHostConfiguratorExtensions.LoadHelpTextPrefix(Topshelf.HostConfigurators.HostConfigurator,System.Reflection.Assembly,System.String)">
+            <summary>
+            Specifies a text resource to be loaded and displayed before the built-in system help text is displayed
+            </summary>
+            <param name="hostConfigurator"></param>
+            <param name="assembly">The assembly containing the text resource</param>
+            <param name="resourceName">The name of the embedded resource</param>
+        </member>
         <member name="T:Topshelf.HostConfigurators.DependencyHostConfigurator">
             <summary>
             Adds a dependency to the InstallBuilder (ignored otherwise)
@@ -281,9 +348,16 @@
         </member>
         <member name="T:Topshelf.HostConfigurators.HostBuilderConfigurator">
             <summary>
-            Can configure/replace the input HostBuilder, returning the original
-            or a new HostBuilder
+            Can configure/replace the input <see cref="T:Topshelf.Builders.HostBuilder"/>, returning the original
+            or a new <see cref="T:Topshelf.Builders.HostBuilder"/>.
             </summary>
+        </member>
+        <member name="M:Topshelf.HostConfigurators.HostBuilderConfigurator.Configure(Topshelf.Builders.HostBuilder)">
+            <summary>
+            Configures the host builder.
+            </summary>
+            <param name="builder">The host builder.</param>
+            <returns>The configured host builder.</returns>
         </member>
         <member name="M:Topshelf.HostConfigurators.HostConfigurator.SetDisplayName(System.String)">
             <summary>
@@ -395,72 +469,165 @@
             </summary>
             <param name="callback">The action to run when an exception occurs.</param>
         </member>
-        <member name="M:Topshelf.HelpHostConfiguratorExtensions.SetHelpTextPrefix(Topshelf.HostConfigurators.HostConfigurator,System.String)">
+        <member name="T:Topshelf.HostConfigurators.ServiceRecoveryHostConfigurator">
             <summary>
-            Sets additional text to be displayed before the built-in help text is displayed
+            Implements a service recovery configurator and host builder configurator.
             </summary>
-            <param name="hostConfigurator"></param>
-            <param name="text"></param>
+            <seealso cref="T:Topshelf.ServiceRecoveryConfigurator" />
+            <seealso cref="T:Topshelf.HostConfigurators.HostBuilderConfigurator" />
         </member>
-        <member name="M:Topshelf.HelpHostConfiguratorExtensions.LoadHelpTextPrefix(Topshelf.HostConfigurators.HostConfigurator,System.Reflection.Assembly,System.String)">
+        <member name="M:Topshelf.HostConfigurators.ServiceRecoveryHostConfigurator.Configure(Topshelf.Builders.HostBuilder)">
             <summary>
-            Specifies a text resource to be loaded and displayed before the built-in system help text is displayed
+            Configures the host builder.
             </summary>
-            <param name="hostConfigurator"></param>
-            <param name="assembly">The assembly containing the text resource</param>
-            <param name="resourceName">The name of the embedded resource</param>
+            <param name="builder">The host builder.</param>
+            <returns>The configured host builder.</returns>
+            <exception cref="T:System.ArgumentNullException">builder</exception>
         </member>
-        <member name="T:Topshelf.Configurators.ValidateResult">
+        <member name="M:Topshelf.HostConfigurators.ServiceRecoveryHostConfigurator.RestartService(System.TimeSpan)">
             <summary>
-            Reports information about the configuration before configuring
-            so that corrections can be made without allocating resources, etc.
+            Adds a restart service recovery action with the specified delay.
+            </summary>
+            <param name="delay">The delay.</param>
+            <returns>The service recovery configurator.</returns>
+        </member>
+        <member name="M:Topshelf.HostConfigurators.ServiceRecoveryHostConfigurator.RestartService(System.Int32)">
+            <summary>
+            Adds a restart service recovery action with the specified delay in minutes.
+            </summary>
+            <param name="delayInMinutes">The delay in minutes.</param>
+            <returns>The service recovery configurator.</returns>
+        </member>
+        <member name="M:Topshelf.HostConfigurators.ServiceRecoveryHostConfigurator.RestartComputer(System.TimeSpan,System.String)">
+            <summary>
+            Adds a restart computer recovery action with the specified delay.
+            </summary>
+            <param name="delay">The delay.</param>
+            <param name="message">The message.</param>
+            <returns>ServiceRecoveryConfigurator.</returns>
+        </member>
+        <member name="M:Topshelf.HostConfigurators.ServiceRecoveryHostConfigurator.RestartComputer(System.Int32,System.String)">
+            <summary>
+            Adds a restart computer recovery action with the specified delay in minutes.
+            </summary>
+            <param name="delayInMinutes">The delay in minutes.</param>
+            <param name="message">The message.</param>
+            <returns>The service recovery configurator.</returns>
+        </member>
+        <member name="M:Topshelf.HostConfigurators.ServiceRecoveryHostConfigurator.RunProgram(System.TimeSpan,System.String)">
+            <summary>
+            Adds a run program recovery action with the specified delay.
+            </summary>
+            <param name="delay">The delay.</param>
+            <param name="command">The command to run.</param>
+            <returns>The service recovery configurator.</returns>
+        </member>
+        <member name="M:Topshelf.HostConfigurators.ServiceRecoveryHostConfigurator.RunProgram(System.Int32,System.String)">
+            <summary>
+            Adds a run program recovery action with the specified delay in minutes.
+            </summary>
+            <param name="delayInMinutes">The delay in minutes.</param>
+            <param name="command">The command.</param>
+            <returns>The service recovery configurator.</returns>
+        </member>
+        <member name="M:Topshelf.HostConfigurators.ServiceRecoveryHostConfigurator.SetResetPeriod(System.Int32)">
+            <summary>
+            Sets the recovery reset period in days.
+            </summary>
+            <param name="days">The reset period in days.</param>
+        </member>
+        <member name="M:Topshelf.HostConfigurators.ServiceRecoveryHostConfigurator.OnCrashOnly">
+            <summary>
+            Specifies that the recovery actions should only be taken on a service crash. If the service exits
+            with a non-zero exit code, it will not be restarted.
             </summary>
         </member>
-        <member name="P:Topshelf.Configurators.ValidateResult.Disposition">
+        <member name="T:Topshelf.Options.DependencyOption">
             <summary>
-            The disposition of the result, any Failure items will prevent
-            the configuration from completing.
+            Represents an option to set a service dependency.
+            </summary>
+            <seealso cref="T:Topshelf.Options.Option" />
+        </member>
+        <member name="F:Topshelf.Options.DependencyOption.dependencyName">
+            <summary>
+            The dependency name
             </summary>
         </member>
-        <member name="P:Topshelf.Configurators.ValidateResult.Message">
+        <member name="M:Topshelf.Options.DependencyOption.#ctor(System.String)">
             <summary>
-            The message associated with the result
+            Initializes a new instance of the <see cref="T:Topshelf.Options.DependencyOption"/> class.
+            </summary>
+            <param name="dependencyName">Name of the dependency.</param>
+        </member>
+        <member name="M:Topshelf.Options.DependencyOption.ApplyTo(Topshelf.HostConfigurators.HostConfigurator)">
+            <summary>
+            Applies the option to the specified host configurator.
+            </summary>
+            <param name="configurator">The host configurator.</param>
+        </member>
+        <member name="T:Topshelf.Options.ServiceRecoveryOption">
+            <summary>
+            Represents an option to set a service recovery options.
+            </summary>
+            <seealso cref="T:Topshelf.Options.Option" />
+        </member>
+        <member name="M:Topshelf.Options.ServiceRecoveryOption.#ctor(Topshelf.Runtime.Windows.ServiceRecoveryOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Topshelf.Options.ServiceRecoveryOption"/> class.
+            </summary>
+            <param name="serviceRecoveryOptions">The service recovery options.</param>
+        </member>
+        <member name="M:Topshelf.Options.ServiceRecoveryOption.ApplyTo(Topshelf.HostConfigurators.HostConfigurator)">
+            <summary>
+            Applies the option to the specified host configurator.
+            </summary>
+            <param name="configurator">The host configurator.</param>
+        </member>
+        <member name="T:Topshelf.Options.StartTimeoutOption">
+            <summary>
+            Represents an option to set a service start timeout (in seconds).
+            </summary>
+            <seealso cref="T:Topshelf.Options.Option" />
+        </member>
+        <member name="F:Topshelf.Options.StartTimeoutOption.startTimeout">
+            <summary>
+            The start timeout (in seconds).
             </summary>
         </member>
-        <member name="P:Topshelf.Configurators.ValidateResult.Key">
+        <member name="M:Topshelf.Options.StartTimeoutOption.#ctor(System.Int32)">
             <summary>
-            The key associated with the result (chained if configurators are nested)
+            Initializes a new instance of the <see cref="T:Topshelf.Options.StartTimeoutOption"/> class.
+            </summary>
+            <param name="startTimeout">The start timeout (in seconds).</param>
+        </member>
+        <member name="M:Topshelf.Options.StartTimeoutOption.ApplyTo(Topshelf.HostConfigurators.HostConfigurator)">
+            <summary>
+            Applies the option to the specified host configurator.
+            </summary>
+            <param name="configurator">The host configurator.</param>
+        </member>
+        <member name="T:Topshelf.Options.StopTimeoutOption">
+            <summary>
+            Represents an option to set a service stop timeout (in seconds).
+            </summary>
+            <seealso cref="T:Topshelf.Options.Option" />
+        </member>
+        <member name="F:Topshelf.Options.StopTimeoutOption.stopTimeoout">
+            <summary>
+            The stop timeout (in seconds).
             </summary>
         </member>
-        <member name="P:Topshelf.Configurators.ValidateResult.Value">
+        <member name="M:Topshelf.Options.StopTimeoutOption.#ctor(System.Int32)">
             <summary>
-            The value associated with the result
+            Initializes a new instance of the <see cref="T:Topshelf.Options.StopTimeoutOption"/> class.
             </summary>
+            <param name="stopTimeoout">The stop timeout (in seconds).</param>
         </member>
-        <member name="T:Topshelf.Constants.KnownServiceNames">
+        <member name="M:Topshelf.Options.StopTimeoutOption.ApplyTo(Topshelf.HostConfigurators.HostConfigurator)">
             <summary>
-            A selection of commonly-used Windows services.
+            Applies the option to the specified host configurator.
             </summary>
-        </member>
-        <member name="P:Topshelf.Constants.KnownServiceNames.Msmq">
-            <summary>
-            The Microsoft Message Queue service.
-            </summary>
-        </member>
-        <member name="P:Topshelf.Constants.KnownServiceNames.SqlServer">
-            <summary>
-            The Microsoft SQL Server service.
-            </summary>
-        </member>
-        <member name="P:Topshelf.Constants.KnownServiceNames.IIS">
-            <summary>
-            The Internet Information Server service.
-            </summary>
-        </member>
-        <member name="P:Topshelf.Constants.KnownServiceNames.EventLog">
-            <summary>
-            The Event Log service.
-            </summary>
+            <param name="configurator">The host configurator.</param>
         </member>
         <member name="M:Topshelf.ServiceConfigurators.ServiceConfigurator.BeforeStartingService(System.Action{Topshelf.HostStartContext})">
             <summary>
@@ -482,63 +649,6 @@
             Registers a callback invoked after the service Stop method is called.
             </summary>
         </member>
-        <member name="M:Topshelf.ServiceRecoveryConfigurator.RestartService(System.Int32)">
-            <summary>
-              Restart the service after waiting the delay period specified
-            </summary>
-            <param name="delayInMinutes"> </param>
-        </member>
-        <member name="M:Topshelf.ServiceRecoveryConfigurator.RestartComputer(System.Int32,System.String)">
-            <summary>
-              Restart the computer after waiting the delay period in minutes
-            </summary>
-            <param name="delayInMinutes"> </param>
-            <param name="message"> </param>
-        </member>
-        <member name="M:Topshelf.ServiceRecoveryConfigurator.RunProgram(System.Int32,System.String)">
-            <summary>
-              Run the command specified
-            </summary>
-            <param name="delayInMinutes"> </param>
-            <param name="command"> </param>
-        </member>
-        <member name="M:Topshelf.ServiceRecoveryConfigurator.SetResetPeriod(System.Int32)">
-            <summary>
-              Specifies the reset period for the restart options
-            </summary>
-            <param name="days"> </param>
-        </member>
-        <member name="M:Topshelf.ServiceRecoveryConfigurator.OnCrashOnly">
-            <summary>
-            Specifies that the recovery actions should only be taken on a service crash. If the service exists
-            with a non-zero exit code, it will not be restarted.
-            </summary>
-        </member>
-        <member name="M:Topshelf.TestHostExtensions.UseTestHost(Topshelf.HostConfigurators.HostConfigurator)">
-            <summary>
-            Configures the test host, which simply starts and stops the service. Meant to be used
-            to verify the service can be created, started, stopped, and disposed without issues.
-            </summary>
-        </member>
-        <member name="T:Topshelf.HostFactory">
-            <summary>
-              Configure and run a service host using the HostFactory
-            </summary>
-        </member>
-        <member name="M:Topshelf.HostFactory.New(System.Action{Topshelf.HostConfigurators.HostConfigurator})">
-            <summary>
-              Configures a new service host
-            </summary>
-            <param name="configureCallback"> Configuration method to call </param>
-            <returns> A Topshelf service host, ready to run </returns>
-        </member>
-        <member name="M:Topshelf.HostFactory.Run(System.Action{Topshelf.HostConfigurators.HostConfigurator})">
-            <summary>
-              Configures and runs a new service host, handling any exceptions and writing them to the log.
-            </summary>
-            <param name="configureCallback"> Configuration method to call </param>
-            <returns> Returns the exit code of the process that should be returned by your application's main method </returns>
-        </member>
         <member name="M:Topshelf.ServiceEventConfiguratorExtensions.BeforeStartingService``1(``0,System.Action)">
             <summary>
             Registers a callback invoked before the service Start method is called.
@@ -557,6 +667,75 @@
         <member name="M:Topshelf.ServiceEventConfiguratorExtensions.AfterStoppingService``1(``0,System.Action)">
             <summary>
             Registers a callback invoked after the service Stop method is called.
+            </summary>
+        </member>
+        <member name="T:Topshelf.ServiceRecoveryConfigurator">
+            <summary>
+            Defines a service recovery configurator.
+            </summary>
+        </member>
+        <member name="M:Topshelf.ServiceRecoveryConfigurator.RestartService(System.TimeSpan)">
+            <summary>
+              Restart the service after waiting the delay period specified
+            </summary>
+            <param name="delay">The delay.</param>
+            <returns>The service recovery configurator.</returns>
+        </member>
+        <member name="M:Topshelf.ServiceRecoveryConfigurator.RestartService(System.Int32)">
+            <summary>
+              Restart the service after waiting the delay period in minutes
+            </summary>
+            <param name="delayInMinutes">The delay in minutes.</param>
+            <returns>The service recovery configurator.</returns>
+        </member>
+        <member name="M:Topshelf.ServiceRecoveryConfigurator.RestartComputer(System.TimeSpan,System.String)">
+            <summary>
+              Restart the computer after waiting the delay period specified
+            </summary>
+            <param name="delay">The delay.</param>
+            <param name="message"></param>
+            <returns>The service recovery configurator.</returns>
+        </member>
+        <member name="M:Topshelf.ServiceRecoveryConfigurator.RestartComputer(System.Int32,System.String)">
+            <summary>
+              Restart the computer after waiting the delay period in minutes
+            </summary>
+            <param name="delayInMinutes">The delay in minutes.</param>
+            <param name="message"> </param>
+            <returns>The service recovery configurator.</returns>
+        </member>
+        <member name="M:Topshelf.ServiceRecoveryConfigurator.RunProgram(System.TimeSpan,System.String)">
+            <summary>
+              Run the command specified
+            </summary>
+            <param name="delay">The delay.</param>
+            <param name="command">The command to run.</param>
+            <returns>The service recovery configurator.</returns>
+        </member>
+        <member name="M:Topshelf.ServiceRecoveryConfigurator.RunProgram(System.Int32,System.String)">
+            <summary>
+              Run the command specified
+            </summary>
+            <param name="delayInMinutes">The delay in minutes.</param>
+            <param name="command">The command to run.</param>
+            <returns>The service recovery configurator.</returns>
+        </member>
+        <member name="M:Topshelf.ServiceRecoveryConfigurator.SetResetPeriod(System.Int32)">
+            <summary>
+              Specifies the reset period for the restart options
+            </summary>
+            <param name="days">The reset period in days.</param>
+        </member>
+        <member name="M:Topshelf.ServiceRecoveryConfigurator.OnCrashOnly">
+            <summary>
+            Specifies that the recovery actions should only be taken on a service crash. If the service exits
+            with a non-zero exit code, it will not be restarted.
+            </summary>
+        </member>
+        <member name="M:Topshelf.TestHostExtensions.UseTestHost(Topshelf.HostConfigurators.HostConfigurator)">
+            <summary>
+            Configures the test host, which simply starts and stops the service. Meant to be used
+            to verify the service can be created, started, stopped, and disposed without issues.
             </summary>
         </member>
         <member name="T:Topshelf.Host">
@@ -594,6 +773,25 @@
             <summary>
             Restarts the Host
             </summary>
+        </member>
+        <member name="T:Topshelf.HostFactory">
+            <summary>
+              Configure and run a service host using the HostFactory
+            </summary>
+        </member>
+        <member name="M:Topshelf.HostFactory.New(System.Action{Topshelf.HostConfigurators.HostConfigurator})">
+            <summary>
+              Configures a new service host
+            </summary>
+            <param name="configureCallback"> Configuration method to call </param>
+            <returns> A Topshelf service host, ready to run </returns>
+        </member>
+        <member name="M:Topshelf.HostFactory.Run(System.Action{Topshelf.HostConfigurators.HostConfigurator})">
+            <summary>
+              Configures and runs a new service host, handling any exceptions and writing them to the log.
+            </summary>
+            <param name="configureCallback"> Configuration method to call </param>
+            <returns> Returns the exit code of the process that should be returned by your application's main method </returns>
         </member>
         <member name="M:Topshelf.HostStartContext.CancelStart">
             <summary>
@@ -1176,6 +1374,107 @@
             Includes STANDARD_RIGHTS_REQUIRED, in addition to all access 
             rights in this table.
             </summary>
+        </member>
+        <member name="F:Topshelf.Runtime.Windows.NativeMethods.SC_ACTION.Type">
+            <summary>
+            The action to be performed. This member can be one of the following values from the <see cref="T:Topshelf.Runtime.Windows.NativeMethods.SC_ACTION_TYPE" /> enumeration type.
+            </summary>
+        </member>
+        <member name="F:Topshelf.Runtime.Windows.NativeMethods.SC_ACTION.Delay">
+            <summary>
+            The time to wait before performing the specified action, in milliseconds.
+            </summary>
+        </member>
+        <member name="T:Topshelf.Runtime.Windows.RestartServiceRecoveryAction">
+            <summary>
+            Represents a restart service service recovery action.
+            </summary>
+            <seealso cref="T:Topshelf.Runtime.Windows.ServiceRecoveryAction" />
+        </member>
+        <member name="M:Topshelf.Runtime.Windows.RestartServiceRecoveryAction.#ctor(System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Topshelf.Runtime.Windows.RestartServiceRecoveryAction"/> class.
+            </summary>
+            <param name="delay">The delay.</param>
+        </member>
+        <member name="M:Topshelf.Runtime.Windows.RestartServiceRecoveryAction.GetAction">
+            <summary>
+            Gets the service recovery configuration action.
+            </summary>
+            <returns>A <see cref="T:Topshelf.Runtime.Windows.NativeMethods.SC_ACTION"/> representing the restart service service recovery configuration action.</returns>
+        </member>
+        <member name="T:Topshelf.Runtime.Windows.RestartSystemRecoveryAction">
+            <summary>
+            Represents a restart system service recovery action.
+            </summary>
+            <seealso cref="T:Topshelf.Runtime.Windows.ServiceRecoveryAction" />
+        </member>
+        <member name="M:Topshelf.Runtime.Windows.RestartSystemRecoveryAction.#ctor(System.TimeSpan,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Topshelf.Runtime.Windows.RestartSystemRecoveryAction"/> class.
+            </summary>
+            <param name="delay">The delay.</param>
+            <param name="restartMessage">The restart message.</param>
+        </member>
+        <member name="P:Topshelf.Runtime.Windows.RestartSystemRecoveryAction.RestartMessage">
+            <summary>
+            Gets the system restart message.
+            </summary>
+            <value>The system restart message.</value>
+        </member>
+        <member name="M:Topshelf.Runtime.Windows.RestartSystemRecoveryAction.GetAction">
+            <summary>
+            Gets the service recovery configuration action.
+            </summary>
+            <returns>A <see cref="T:Topshelf.Runtime.Windows.NativeMethods.SC_ACTION"/> representing the restart system service recovery configuration action.</returns>
+        </member>
+        <member name="T:Topshelf.Runtime.Windows.RunProgramRecoveryAction">
+            <summary>
+            Represents a run command service recovery action.
+            </summary>
+            <seealso cref="T:Topshelf.Runtime.Windows.ServiceRecoveryAction" />
+        </member>
+        <member name="M:Topshelf.Runtime.Windows.RunProgramRecoveryAction.#ctor(System.TimeSpan,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Topshelf.Runtime.Windows.RunProgramRecoveryAction"/> class.
+            </summary>
+            <param name="delay">The delay.</param>
+            <param name="command">The command.</param>
+        </member>
+        <member name="P:Topshelf.Runtime.Windows.RunProgramRecoveryAction.Command">
+            <summary>
+            Gets the command to run.
+            </summary>
+            <value>The command. to run</value>
+        </member>
+        <member name="M:Topshelf.Runtime.Windows.RunProgramRecoveryAction.GetAction">
+            <summary>
+            Gets the service recovery configuration action.
+            </summary>
+            <returns>A <see cref="T:Topshelf.Runtime.Windows.NativeMethods.SC_ACTION"/> representing the run command service recovery configuration action.</returns>
+        </member>
+        <member name="T:Topshelf.Runtime.Windows.ServiceRecoveryAction">
+            <summary>
+            Represents a service recovery action.
+            </summary>
+        </member>
+        <member name="M:Topshelf.Runtime.Windows.ServiceRecoveryAction.#ctor(System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Topshelf.Runtime.Windows.ServiceRecoveryAction"/> class.
+            </summary>
+            <param name="delay">The delay.</param>
+        </member>
+        <member name="P:Topshelf.Runtime.Windows.ServiceRecoveryAction.Delay">
+            <summary>
+            Gets the delay in milliseconds.
+            </summary>
+            <value>The delay in milliseconds.</value>
+        </member>
+        <member name="M:Topshelf.Runtime.Windows.ServiceRecoveryAction.GetAction">
+            <summary>
+            Gets the service recovery configuration action.
+            </summary>
+            <returns>A <see cref="T:Topshelf.Runtime.Windows.NativeMethods.SC_ACTION"/> representing the service recovery configuration action.</returns>
         </member>
         <member name="M:Topshelf.Runtime.Windows.WindowsHostSettings.#ctor">
             <summary>

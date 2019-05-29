@@ -21,9 +21,9 @@ namespace ServicosWindowsRespostaEmail
                 });
                 //Configure a Conta que o serviço do Windows usa para rodar
                 configure.RunAsLocalSystem();
-                configure.SetServiceName("ResponderEmailAutomaticamente");
-                configure.SetDisplayName("Resposta automática de e-mail");
-                configure.SetDescription("Serviço de resposta automática de e-mails");
+                configure.SetServiceName("ResponderAutomaticamente");
+                configure.SetDisplayName("Resposta automática CEB");
+                configure.SetDescription("Serviço de resposta automática às solicitações de novas matrículas vindas do site do CEB");
             });
         }
     }
